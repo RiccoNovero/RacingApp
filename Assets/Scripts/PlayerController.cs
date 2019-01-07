@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
-using InControl;
+//using InControl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,7 +42,8 @@ public class PlayerController : MonoBehaviour
 
 
         currentLevel = SceneManager.GetActiveScene().buildIndex;
-
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        Debug.Log("PlayerPrefs CurrentLevel = " + PlayerPrefs.GetInt("CurrentLevel"));
         rb2d = GetComponent<Rigidbody2D>();
         count = 0;
         StartCoroutine(SetCountText());
@@ -69,13 +70,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (TouchManager.TouchCount > 0)
-        {
-            UpdateFirebaseData(currentLevel);
-        }
-    }
+
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
