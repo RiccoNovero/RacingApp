@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(2); //time before the next scene is loaded
 
-            if (currentLevel < SceneManager.sceneCountInBuildSettings - 1) //build index starts at 0
+            if (currentLevel < 3) //build index starts at 0
             {
                 SceneManager.LoadScene(currentLevel + 1);
             }
@@ -147,9 +147,10 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateFirebaseData(int level)
     {
+        Debug.Log("UpdateFirebaseData()");
         string currentSystemTime = System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString();
         FirebaseDatabase.DefaultInstance.GetReference("Level" + currentLevel).Child(currentSystemTime).SetValueAsync(timerText.text);
-
+        Debug.Log("Firebase Reference" + FirebaseDatabase.DefaultInstance.GetReference("Level" + currentLevel));
     }
 
     void UpdateFirebaseDataHorses()
